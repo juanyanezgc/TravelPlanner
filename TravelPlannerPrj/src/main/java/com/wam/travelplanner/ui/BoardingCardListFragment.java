@@ -135,9 +135,11 @@ public class BoardingCardListFragment extends Fragment {
 
         /**
          * Finds a sorted trip by backtracking
-         * @param stage
-         * @param unsorted
-         * @param sorted**/
+         *
+         * @param stage    Number of boarding cards sorted
+         * @param unsorted List of remaining unsorted boarding cards
+         * @param sorted   List of sorted boarding cards*
+         */
         private void sortBoardingCards(int stage, List<BoardingCard> unsorted, List<BoardingCard> sorted) {
 
             if (stage != mBoardingCards.size()) {
