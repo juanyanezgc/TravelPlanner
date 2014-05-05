@@ -1,9 +1,13 @@
 package com.wam.travelplanner.utils;
 
+import com.wam.travelplanner.model.BoardingCard;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Utils {
 
@@ -24,5 +28,19 @@ public class Utils {
 
         return total.toString();
     }
+
+
+    public static List<BoardingCard> cloneBoardingCardsList(List<BoardingCard> boardingCardList){
+        List<BoardingCard> clonedList =  new ArrayList<BoardingCard>(boardingCardList.size());
+
+        for (BoardingCard boardingCard : boardingCardList){
+            BoardingCard clonedBoardingCard =  new BoardingCard(boardingCard);
+            clonedList.add(clonedBoardingCard);
+        }
+
+        return clonedList;
+    }
+
+
 
 }

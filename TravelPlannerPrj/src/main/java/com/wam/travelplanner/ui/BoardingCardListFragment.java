@@ -21,17 +21,19 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BoardingCardListFragment extends Fragment {
 
     private ViewSwitcher mViewSwitcher;
     private TextView mTxtLoading;
+    private Button mBtnSort;
     private TextView mTxtListTitle;
     private ListView mListBoardingCards;
 
-    private AsyncTask mTask;
-
+    private List<BoardingCard> mBoardingCards;
+    private AsyncTask<Void, Void, List<BoardingCard>> mTask;
 
 
     private View.OnClickListener mBtnSortOnClickListener = new View.OnClickListener() {
@@ -39,6 +41,8 @@ public class BoardingCardListFragment extends Fragment {
         public void onClick(View view) {
             mTxtLoading.setText(getString(R.string.sorting_dialog));
             mViewSwitcher.showPrevious();
+            mTask = new SortTripTask();
+            mTask.execute();
         }
     };
 
@@ -50,6 +54,7 @@ public class BoardingCardListFragment extends Fragment {
         btnSort.setOnClickListener(mBtnSortOnClickListener);
 
         mTxtLoading = (TextView) mViewSwitcher.findViewById(R.id.txtLoading);
+        mBtnSort = (Button) mViewSwitcher.findViewById(R.id.btnSort);
         mTxtListTitle = (TextView) mViewSwitcher.findViewById(R.id.txtListTitle);
         mListBoardingCards = (ListView) mViewSwitcher.findViewById(R.id.listBoardingCards);
 
@@ -69,17 +74,19 @@ public class BoardingCardListFragment extends Fragment {
         super.onDetach();
         mViewSwitcher = null;
         mTxtLoading = null;
+        mBtnSort = null;
         mTxtListTitle = null;
 
-        if(mTask != null && mTask.getStatus() == AsyncTask.Status.RUNNING){
+        if (mTask != null && mTask.getStatus() == AsyncTask.Status.RUNNING) {
             mTask.cancel(true);
         }
-        
+
         mTask = null;
     }
 
     private void fillList(List<BoardingCard> boardingCards) {
-        BoardingCardsListAdapter boardingCardsListAdapter = new BoardingCardsListAdapter(getActivity(), boardingCards);
+        mBoardingCards = boardingCards;
+        BoardingCardsListAdapter boardingCardsListAdapter = new BoardingCardsListAdapter(getActivity(), mBoardingCards);
         mListBoardingCards.setAdapter(boardingCardsListAdapter);
         mViewSwitcher.showNext();
     }
@@ -105,6 +112,67 @@ public class BoardingCardListFragment extends Fragment {
         @Override
         protected void onPostExecute(List<BoardingCard> boardingCards) {
             fillList(boardingCards);
+        }
+    }
+
+    private class SortTripTask extends AsyncTask<Void, Void, List<BoardingCard>> {
+
+        @Override
+        protected List<BoardingCard> doInBackground(Void... params) {
+            List<BoardingCard> sortedList = new ArrayList<BoardingCard>();
+
+            sortBoardingCards(0, mBoardingCards, sortedList);
+
+            return sortedList;
+        }
+
+        @Override
+        protected void onPostExecute(List<BoardingCard> boardingCards) {
+            mBtnSort.setVisibility(View.GONE);
+            mTxtListTitle.setText(getString(R.string.sorted_boarding_cards));
+            fillList(boardingCards);
+        }
+
+        /**
+         * Finds a sorted trip by backtracking
+         * @param stage
+         * @param unsorted
+         * @param sorted**/
+        private void sortBoardingCards(int stage, List<BoardingCard> unsorted, List<BoardingCard> sorted) {
+
+            if (stage != mBoardingCards.size()) {
+
+                for (BoardingCard boardingCard : unsorted) {
+                    List<BoardingCard> remainingBoardingCards = Utils.cloneBoardingCardsList(unsorted);
+                    remainingBoardingCards.remove(boardingCard);
+
+                    if (stage == 0) {
+
+                        sorted.add(boardingCard);
+                        sortBoardingCards(stage + 1, remainingBoardingCards, sorted);
+                        if (sorted.size() == mBoardingCards.size()) {
+                            break;
+                        }
+
+                        sorted.remove(boardingCard);
+
+                    } else {
+
+                        BoardingCard lastAddedBoardingCard = sorted.get(stage - 1);
+                        if (lastAddedBoardingCard.getTo().equals(boardingCard.getFrom())) {
+                            sorted.add(boardingCard);
+                            sortBoardingCards(stage + 1, remainingBoardingCards, sorted);
+
+                            if (sorted.size() == mBoardingCards.size()) {
+                                break;
+                            }
+
+                            sorted.remove(boardingCard);
+
+                        }
+                    }
+                }
+            }
         }
     }
 

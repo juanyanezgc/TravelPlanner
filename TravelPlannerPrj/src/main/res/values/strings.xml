@@ -8,6 +8,7 @@
     <string name="dummy_text_large">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ullamcorper orci neque, sed sagittis ipsum elementum at. Integer viverra iaculis quam, ac lacinia nibh lacinia sit amet. Sed varius ullamcorper ipsum sit amet interdum. Sed quis feugiat urna. Mauris laoreet arcu sed erat eleifend, et porttitor enim laoreet. Mauris luctus ut diam in dignissim. Cras ac bibendum felis. Quisque facilisis sagittis risus. Sed nec elementum neque. Etiam nec sagittis urna, sit amet condimentum libero.</string>
     <string name="boarding_card_summary">%1$s - %2$s > %3$s</string>
     <string name="unsorted_boarding_cards">Unsorted boarding cards:</string>
+    <string name="sorted_boarding_cards">Sorted trip:</string>
     <string name="btn_sort">Sort Trip</string>
 
 

@@ -9,7 +9,6 @@ public class BoardingCard {
     private String gate;
     private String baggage;
 
-
     public BoardingCard(String id, String from, String to, String seat, TransportType type, String gate, String baggage) {
         this.id = id;
         this.from = from;
@@ -18,6 +17,16 @@ public class BoardingCard {
         this.type = type;
         this.gate = gate;
         this.baggage = baggage;
+    }
+
+    public BoardingCard(BoardingCard boardingCard) {
+        this.id = boardingCard.getId();
+        this.from = boardingCard.getFrom();
+        this.to = boardingCard.getTo();
+        this.seat = boardingCard.getSeat();
+        this.type = boardingCard.getType();
+        this.gate = boardingCard.getGate();
+        this.baggage = boardingCard.getBaggage();
     }
 
     public String getId() {
@@ -75,4 +84,18 @@ public class BoardingCard {
     public void setBaggage(String baggage) {
         this.baggage = baggage;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BoardingCard that = (BoardingCard) o;
+
+        if (!from.equals(that.from)) return false;
+        if (!to.equals(that.to)) return false;
+
+        return true;
+    }
+
 }
