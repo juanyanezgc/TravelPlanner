@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.wam.travelplanner.R;
 import com.wam.travelplanner.model.BoardingCard;
+import com.wam.travelplanner.model.TransportType;
 
 import java.util.List;
 
@@ -24,17 +25,17 @@ public class BoardingCardsListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return mBoardingCards.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return mBoardingCards.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -57,6 +58,18 @@ public class BoardingCardsListAdapter extends BaseAdapter {
 
         String boardingCardSummary = mInflater.getContext().getString(R.string.boarding_card_summary, transportType, from, to);
         boardingCardViewHolder.txtBoardingCard.setText(boardingCardSummary);
+
+        switch (boardingCard.getType()){
+            case Train:
+                boardingCardViewHolder.txtBoardingCard.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_launcher,0,0,0);
+                break;
+            case Plane:
+                boardingCardViewHolder.txtBoardingCard.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_launcher,0,0,0);
+                break;
+            case Bus:
+                boardingCardViewHolder.txtBoardingCard.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_launcher,0,0,0);
+                break;
+        }
 
         return view;
     }

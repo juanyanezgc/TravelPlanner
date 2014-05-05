@@ -6,16 +6,17 @@ public class BoardingCard {
     private String to;
     private String seat;
     private TransportType type;
+    private String gate;
     private String baggage;
 
 
-
-    public BoardingCard(String id, String from, String to,String seat, TransportType type, String baggage) {
+    public BoardingCard(String id, String from, String to, String seat, TransportType type, String gate, String baggage) {
         this.id = id;
         this.from = from;
         this.to = to;
         this.seat = seat;
         this.type = type;
+        this.gate = gate;
         this.baggage = baggage;
     }
 
@@ -43,11 +44,11 @@ public class BoardingCard {
         this.to = to;
     }
 
-    public String getSeat(){
+    public String getSeat() {
         return seat;
     }
 
-    public void setSeat(String seat){
+    public void setSeat(String seat) {
         this.seat = seat;
     }
 
@@ -57,6 +58,14 @@ public class BoardingCard {
 
     public void setType(TransportType type) {
         this.type = type;
+    }
+
+    public String getGate() {
+        return gate;
+    }
+
+    public void setGate(String gate) {
+        this.gate = gate;
     }
 
     public String getBaggage() {

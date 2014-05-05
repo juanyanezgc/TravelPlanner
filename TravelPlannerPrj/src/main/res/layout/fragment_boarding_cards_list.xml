@@ -28,10 +28,32 @@
 
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/listBoardingCards"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnSort"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/gap_normal"
+            android:text="@string/btn_sort"/>
+
+        <TextView
+            android:layout_margin="@dimen/gap_normal"
+            android:id="@+id/txtListTitle"
+            android:layout_below="@+id/btnSort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/unsorted_boarding_cards"/>
+
+        <ListView
+            android:layout_below="@id/txtListTitle"
+            android:id="@+id/listBoardingCards"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
 
 
 </ViewSwitcher>
