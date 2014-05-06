@@ -29,7 +29,7 @@ public class TravelPlannerActivity extends ActionBarActivity implements Boarding
         transaction.addToBackStack(null);
         transaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out);
         transaction.replace(R.id.container, BoardingCardDetailsFragment.newInstance(boardingCard));
-        transaction.commitAllowingStateLoss();
+        transaction.commit();
     }
 
     @Override
