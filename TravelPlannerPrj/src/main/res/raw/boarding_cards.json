@@ -1,6 +1,15 @@
 {
   "boardingCards": [
     {
+      "id": "SK65",
+      "from": "New York JFK",
+      "to": "Sydney",
+      "type": 1,
+      "gate": "4A",
+      "seat": "11C",
+      "baggage": "Automatically transferred"
+    },
+    {
       "id": "78A",
       "from": "Madrid",
       "to": "Barcelona",
@@ -15,6 +24,15 @@
       "gate": "22",
       "seat": "7B",
       "baggage": "Automatically transferred"
+    },
+    {
+      "id": "SD12",
+      "from": "Sydney",
+      "to": "Melbourne",
+      "type": 1,
+      "gate": "52",
+      "seat": "8C",
+      "baggage": "Counter 245"
     },
     {
       "id": "SK455",
