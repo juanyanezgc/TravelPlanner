@@ -5,8 +5,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 
 import com.wam.travelplanner.R;
+import com.wam.travelplanner.model.BoardingCard;
+import com.wam.travelplanner.ui.BoardingCardListFragment.BoardingCardListFragmentListener;
 
-public class TravelPlannerActivity extends ActionBarActivity {
+public class TravelPlannerActivity extends ActionBarActivity implements BoardingCardListFragmentListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,4 +23,18 @@ public class TravelPlannerActivity extends ActionBarActivity {
     }
 
 
+    @Override
+    public void onBoardingCardPress(BoardingCard boardingCard) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.addToBackStack(null);
+        transaction.replace(R.id.container, BoardingCardDetailsFragment.newInstance(boardingCard));
+        transaction.commitAllowingStateLoss();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(false);
+    }
 }

@@ -1,6 +1,9 @@
 package com.wam.travelplanner.model;
 
-public class BoardingCard {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class BoardingCard implements Parcelable {
     private String id;
     private String from;
     private String to;
@@ -27,6 +30,16 @@ public class BoardingCard {
         this.type = boardingCard.getType();
         this.gate = boardingCard.getGate();
         this.baggage = boardingCard.getBaggage();
+    }
+
+    public BoardingCard(Parcel in) {
+        this.id = in.readString();
+        this.from = in.readString();
+        this.to = in.readString();
+        this.seat = in.readString();
+        this.type = in.readParcelable(TransportType.class.getClassLoader());
+        this.gate = in.readString();
+        this.baggage = in.readString();
     }
 
     public String getId() {
@@ -98,4 +111,29 @@ public class BoardingCard {
         return true;
     }
 
+    public static final Creator<BoardingCard> CREATOR = new Parcelable.Creator<BoardingCard>() {
+        public BoardingCard createFromParcel(Parcel in) {
+            return new BoardingCard(in);
+        }
+
+        public BoardingCard[] newArray(int size) {
+            return new BoardingCard[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeString(id);
+        parcel.writeString(from);
+        parcel.writeString(to);
+        parcel.writeString(seat);
+        parcel.writeParcelable(type, PARCELABLE_WRITE_RETURN_VALUE);
+        parcel.writeString(gate);
+        parcel.writeString(baggage);
+    }
 }

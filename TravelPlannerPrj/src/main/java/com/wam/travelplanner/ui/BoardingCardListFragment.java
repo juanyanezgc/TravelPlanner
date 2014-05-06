@@ -1,11 +1,13 @@
 package com.wam.travelplanner.ui;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,6 +28,10 @@ import java.util.List;
 
 public class BoardingCardListFragment extends Fragment {
 
+    public interface BoardingCardListFragmentListener {
+        public void onBoardingCardPress(BoardingCard boardingCard);
+    }
+
     private ViewSwitcher mViewSwitcher;
     private TextView mTxtLoading;
     private Button mBtnSort;
@@ -34,6 +40,7 @@ public class BoardingCardListFragment extends Fragment {
 
     private List<BoardingCard> mBoardingCards;
     private AsyncTask<Void, Void, List<BoardingCard>> mTask;
+    private BoardingCardListFragmentListener mListener;
 
 
     private View.OnClickListener mBtnSortOnClickListener = new View.OnClickListener() {
@@ -46,6 +53,12 @@ public class BoardingCardListFragment extends Fragment {
         }
     };
 
+    private AdapterView.OnItemClickListener mListBoardingCardItemLister = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            mListener.onBoardingCardPress(mBoardingCards.get(position));
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,6 +70,7 @@ public class BoardingCardListFragment extends Fragment {
         mBtnSort = (Button) mViewSwitcher.findViewById(R.id.btnSort);
         mTxtListTitle = (TextView) mViewSwitcher.findViewById(R.id.txtListTitle);
         mListBoardingCards = (ListView) mViewSwitcher.findViewById(R.id.listBoardingCards);
+        mListBoardingCards.setOnItemClickListener(mListBoardingCardItemLister);
 
         return mViewSwitcher;
     }
@@ -70,6 +84,18 @@ public class BoardingCardListFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (BoardingCardListFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement BoardingCardListFragmentListener");
+        }
+
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         mViewSwitcher = null;
@@ -77,11 +103,14 @@ public class BoardingCardListFragment extends Fragment {
         mBtnSort = null;
         mTxtListTitle = null;
 
+        mBoardingCards = null;
+
         if (mTask != null && mTask.getStatus() == AsyncTask.Status.RUNNING) {
             mTask.cancel(true);
         }
 
         mTask = null;
+        mListener = null;
     }
 
     private void fillList(List<BoardingCard> boardingCards) {

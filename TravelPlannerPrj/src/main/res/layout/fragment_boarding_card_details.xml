@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/gap_small"
+    android:paddingLeft="@dimen/gap_normal"
+    android:paddingRight="@dimen/gap_normal"
+    android:paddingTop="@dimen/gap_small">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/imgPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/gap_small"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_launcher"
+            tools:src="@drawable/ic_bus"/>
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <TableRow android:id="@+id/rowFrom">
+
+                <TextView
+                    android:id="@+id/lblFrom"
+                    android:layout_marginRight="@dimen/gap_normal"
+                    android:text="@string/lbl_from" />
+
+                <TextView
+                    android:id="@+id/txtFrom"
+                    tools:text="@string/dummy_text" />
+            </TableRow>
+
+            <TableRow android:id="@+id/rowTo">
+
+                <TextView
+                    android:id="@+id/lblTo"
+                    android:text="@string/lbl_to" />
+
+                <TextView
+                    android:id="@+id/txtTo"
+                    tools:text="@string/dummy_text" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/gap_normal"
+        android:layout_marginRight="@dimen/gap_normal"
+        android:layout_marginTop="@dimen/gap_normal"
+        android:background="@color/divider_color" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/gap_normal">
+
+        <TableRow android:id="@+id/rowID">
+
+            <TextView
+                android:id="@+id/lblID"
+                android:layout_marginRight="@dimen/gap_normal"
+                android:text="@string/lbl_id" />
+
+            <TextView
+                android:id="@+id/txtID"
+                tools:text="@string/dummy_text" />
+
+        </TableRow>
+
+        <TableRow android:id="@+id/rowSeat">
+
+            <TextView
+                android:id="@+id/lblSeat"
+                android:layout_marginRight="@dimen/gap_normal"
+                android:text="@string/lbl_seat" />
+
+            <TextView
+                android:id="@+id/txtSeat"
+                tools:text="@string/dummy_text" />
+
+        </TableRow>
+
+        <TableRow android:id="@+id/rowGate">
+
+            <TextView
+                android:id="@+id/lblGate"
+                android:layout_marginRight="@dimen/gap_normal"
+                android:text="@string/lbl_gate" />
+
+            <TextView
+                android:id="@+id/txtGate"
+                tools:text="@string/dummy_text" />
+        </TableRow>
+
+        <TableRow android:id="@+id/rowBaggage">
+
+            <TextView
+                android:id="@+id/lblBaggage"
+                android:layout_marginRight="@dimen/gap_normal"
+                android:text="@string/lbl_baggage" />
+
+            <TextView
+                android:id="@+id/txtBaggage"
+
+                tools:text="@string/dummy_text" />
+        </TableRow>
+    </TableLayout>
+
+
+</LinearLayout>
