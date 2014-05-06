@@ -61,13 +61,13 @@ public class BoardingCardsListAdapter extends BaseAdapter {
 
         switch (boardingCard.getType()){
             case Train:
-                boardingCardViewHolder.txtBoardingCard.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_launcher,0,0,0);
+                boardingCardViewHolder.txtBoardingCard.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_train,0,0,0);
                 break;
             case Plane:
-                boardingCardViewHolder.txtBoardingCard.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_launcher,0,0,0);
+                boardingCardViewHolder.txtBoardingCard.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_plane,0,0,0);
                 break;
             case Bus:
-                boardingCardViewHolder.txtBoardingCard.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_launcher,0,0,0);
+                boardingCardViewHolder.txtBoardingCard.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_bus,0,0,0);
                 break;
         }
 

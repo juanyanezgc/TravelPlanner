@@ -6,8 +6,9 @@
     android:id="@+id/txtBoardingCard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:drawableLeft="@drawable/ic_launcher"
-    android:drawablePadding="@dimen/gap_normal"
+    android:drawablePadding="@dimen/gap_large"
     android:gravity="center_vertical"
     android:padding="@dimen/gap_small"
-    tools:text="@string/dummy_text_large" />
+    android:textSize="@dimen/text_size"
+    tools:drawableLeft="@drawable/ic_train"
+    tools:text="@string/dummy_text" />

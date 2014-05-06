@@ -17,14 +17,14 @@
 
 
         <ImageView
-            android:id="@+id/imgPhoto"
+            android:id="@+id/imgTransport"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="@dimen/gap_small"
             android:adjustViewBounds="true"
             android:src="@drawable/ic_launcher"
-            tools:src="@drawable/ic_bus"/>
+            tools:src="@drawable/ic_train" />
 
 
         <TableLayout
@@ -37,10 +37,13 @@
                 <TextView
                     android:id="@+id/lblFrom"
                     android:layout_marginRight="@dimen/gap_normal"
-                    android:text="@string/lbl_from" />
+                    android:text="@string/lbl_from"
+                    android:textSize="@dimen/text_size"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/txtFrom"
+                    android:textSize="@dimen/text_size"
                     tools:text="@string/dummy_text" />
             </TableRow>
 
@@ -48,10 +51,13 @@
 
                 <TextView
                     android:id="@+id/lblTo"
-                    android:text="@string/lbl_to" />
+                    android:text="@string/lbl_to"
+                    android:textSize="@dimen/text_size"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/txtTo"
+                    android:textSize="@dimen/text_size"
                     tools:text="@string/dummy_text" />
             </TableRow>
         </TableLayout>
@@ -75,10 +81,13 @@
             <TextView
                 android:id="@+id/lblID"
                 android:layout_marginRight="@dimen/gap_normal"
-                android:text="@string/lbl_id" />
+                android:text="@string/lbl_id"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/txtID"
+                android:textSize="@dimen/text_size"
                 tools:text="@string/dummy_text" />
 
         </TableRow>
@@ -88,10 +97,13 @@
             <TextView
                 android:id="@+id/lblSeat"
                 android:layout_marginRight="@dimen/gap_normal"
-                android:text="@string/lbl_seat" />
+                android:text="@string/lbl_seat"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/txtSeat"
+                android:textSize="@dimen/text_size"
                 tools:text="@string/dummy_text" />
 
         </TableRow>
@@ -101,10 +113,13 @@
             <TextView
                 android:id="@+id/lblGate"
                 android:layout_marginRight="@dimen/gap_normal"
-                android:text="@string/lbl_gate" />
+                android:text="@string/lbl_gate"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/txtGate"
+                android:textSize="@dimen/text_size"
                 tools:text="@string/dummy_text" />
         </TableRow>
 
@@ -113,11 +128,13 @@
             <TextView
                 android:id="@+id/lblBaggage"
                 android:layout_marginRight="@dimen/gap_normal"
-                android:text="@string/lbl_baggage" />
+                android:text="@string/lbl_baggage"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/txtBaggage"
-
+                android:textSize="@dimen/text_size"
                 tools:text="@string/dummy_text" />
         </TableRow>
     </TableLayout>
