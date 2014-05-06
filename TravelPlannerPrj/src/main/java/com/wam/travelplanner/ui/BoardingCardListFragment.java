@@ -32,6 +32,9 @@ public class BoardingCardListFragment extends Fragment {
         public void onBoardingCardPress(BoardingCard boardingCard);
     }
 
+    private static final String BOARDING_CARDS_KEY = "boardingCards";
+    private static final String SORTED_KEY = "sorted";
+
     private ViewSwitcher mViewSwitcher;
     private TextView mTxtLoading;
     private Button mBtnSort;
@@ -41,6 +44,7 @@ public class BoardingCardListFragment extends Fragment {
     private List<BoardingCard> mBoardingCards;
     private AsyncTask<Void, Void, List<BoardingCard>> mTask;
     private BoardingCardListFragmentListener mListener;
+    private boolean mSorted;
 
 
     private View.OnClickListener mBtnSortOnClickListener = new View.OnClickListener() {
@@ -79,8 +83,31 @@ public class BoardingCardListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mTask = new ParseBoardingCardsTask();
-        mTask.execute();
+
+        if (savedInstanceState == null) {
+            if (mBoardingCards == null) {
+                mTask = new ParseBoardingCardsTask();
+                mTask.execute();
+            } else {
+                fillList(mBoardingCards);
+            }
+        } else {
+            mBoardingCards = savedInstanceState.getParcelableArrayList(BOARDING_CARDS_KEY);
+            if (mBoardingCards != null) {
+                mSorted = savedInstanceState.getBoolean(SORTED_KEY);
+                fillList(mBoardingCards);
+            } else {
+                mTask = new ParseBoardingCardsTask();
+                mTask.execute();
+            }
+
+        }
+
+        if (mSorted) {
+            mBtnSort.setVisibility(View.GONE);
+            mTxtListTitle.setText(R.string.sorted_boarding_cards);
+        }
+
     }
 
     @Override
@@ -121,6 +148,12 @@ public class BoardingCardListFragment extends Fragment {
     }
 
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList(BOARDING_CARDS_KEY, (ArrayList<? extends android.os.Parcelable>) mBoardingCards);
+        outState.putBoolean(SORTED_KEY, mSorted);
+    }
+
     private class ParseBoardingCardsTask extends AsyncTask<Void, Void, List<BoardingCard>> {
 
         @Override
@@ -159,6 +192,7 @@ public class BoardingCardListFragment extends Fragment {
         protected void onPostExecute(List<BoardingCard> boardingCards) {
             mBtnSort.setVisibility(View.GONE);
             mTxtListTitle.setText(getString(R.string.sorted_boarding_cards));
+            mSorted = true;
             fillList(boardingCards);
         }
 
